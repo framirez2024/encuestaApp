@@ -1,0 +1,7 @@
+{
+  "name": "encuestaApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
