@@ -5,7 +5,7 @@ import { AuthLayoutPage } from './layouts/auth-layout/auth-layout.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'auth/login',
     pathMatch: 'full'
   },
   {
