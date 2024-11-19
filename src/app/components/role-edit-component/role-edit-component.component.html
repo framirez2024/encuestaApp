@@ -1,0 +1,9 @@
+<form [formGroup]="formEditRole" (submit)="handleUpdateRole()">
+  <div>
+    <ion-input label="Rol" labelPlacement="floating" placeholder="administrador" formControlName="name"
+      value="Administrador" />
+  </div>
+  <div>
+    <ion-button expand="full" type="submit">Actualizar rol</ion-button>
+  </div>
+</form>

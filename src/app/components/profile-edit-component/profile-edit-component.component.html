@@ -1,0 +1,8 @@
+<form [formGroup]="formEditProfile" (submit)="handleEditProfile()">
+  <div>
+    <ion-input label="Perfil" labelPlacement="floating" placeholder="Nombre del perfil" formControlName="name" />
+  </div>
+  <div>
+    <ion-button expand="full" type="submit">Editar perfil</ion-button>
+  </div>
+</form>

@@ -1,0 +1,30 @@
+<ion-content color="light">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h1>Roles</h1>
+            </ion-col>
+            <ion-col size="auto">
+                <ion-button (click)="handleCreateRole()">Nuevo Perfil</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list>
+        <ion-item-sliding *ngFor="let profile of profiles">
+            <ion-item>
+                <ion-label>{{profile.name}}</ion-label>
+            </ion-item>
+            <ion-item-options>
+                <ion-item-option [routerLink]="['/dashboard/profile-edit', profile.id]">
+                    <ion-icon class="option-btn" name="create-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="white" id="deleteRoleBtn{{profile.id}}">
+                    <ion-icon color="danger" class="option-btn" name="trash-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+            <ion-alert trigger="deleteRoleBtn{{profile.id}}" header="Eliminar perfil"
+                message="¿Esta seguro de eliminar el perfil?, no se pueden deshacer los cambios"
+                [buttons]="alertButtons" (didDismiss)="setResult($event)"></ion-alert>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

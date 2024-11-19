@@ -1,0 +1,11 @@
+<form [formGroup]="formLogin" (submit)="handleLogin()">
+  <div>
+    <ion-input label="Usuario" labelPlacement="floating" placeholder="usuario@mail.com" formControlName="user" />
+  </div>
+  <div>
+    <ion-input label="Contraseña" labelPlacement="floating" placeholder="*****" formControlName="password" />
+  </div>
+  <div>
+    <ion-button expand="full" type="submit">Ingresar</ion-button>
+  </div>
+</form>

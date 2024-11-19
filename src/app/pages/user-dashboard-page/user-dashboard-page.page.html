@@ -1,0 +1,36 @@
+<ion-content color="light">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h1>Usuarios</h1>
+            </ion-col>
+            <ion-col size="auto">
+                <ion-button (click)="handleCreateUser()">Nuevo Usuario</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list>
+        <ion-item-sliding *ngFor="let user of users">
+            <ion-item>
+                <ion-avatar slot="start">
+                    <img alt="Silhouette of a person's head"
+                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+                <ion-text>
+                    <h3>{{user.name}} {{user.lastName}}</h3>
+                </ion-text>
+            </ion-item>
+            <ion-item-options>
+                <ion-item-option [routerLink]="['/dashboard/user-edit', user.id]">
+                    <ion-icon class="option-btn" name="create-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="white" id="deleteuserBtn{{user.id}}">
+                    <ion-icon color="danger" class="option-btn" name="trash-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+            <ion-alert trigger="deleteuserBtn{{user.id}}" header="Eliminar usuario"
+                message="¿Esta seguro de eliminar este usuario?, no se pueden deshacer los cambios"
+                [buttons]="alertButtons" (didDismiss)="setResult($event)"></ion-alert>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

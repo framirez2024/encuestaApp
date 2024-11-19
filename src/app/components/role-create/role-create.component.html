@@ -1,0 +1,8 @@
+<form [formGroup]="formCreateRole" (submit)="handleSaveRole()">
+  <div>
+    <ion-input label="Rol" labelPlacement="floating" placeholder="administrador" formControlName="name" />
+  </div>
+  <div>
+    <ion-button expand="full" type="submit">Crear rol</ion-button>
+  </div>
+</form>

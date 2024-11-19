@@ -1,0 +1,8 @@
+<form [formGroup]="formCreateProfile" (submit)="handleSaveProfile()">
+  <div>
+    <ion-input label="Perfil" labelPlacement="floating" placeholder="Nombre del perfil" formControlName="name" />
+  </div>
+  <div>
+    <ion-button expand="full" type="submit">Crear perfil</ion-button>
+  </div>
+</form>

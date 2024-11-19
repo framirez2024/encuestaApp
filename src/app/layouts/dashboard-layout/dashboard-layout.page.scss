@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 15px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+}
+
+.main-content {
+    margin-top: 2.5rem;
+}

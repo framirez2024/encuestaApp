@@ -1,0 +1,28 @@
+<form [formGroup]="formEditUser" (submit)="handleSaveUser()">
+  <ion-list>
+    <ion-item>
+      <ion-input label="Nombre" labelPlacement="stacked" placeholder="Jhon" formControlName="name" />
+    </ion-item>
+    <ion-item>
+      <ion-input label="Apellidos" labelPlacement="stacked" placeholder="Doe" formControlName="lastName" />
+    </ion-item>
+    <ion-item>
+      <ion-input label="Correo electronico" labelPlacement="stacked" placeholder="jhondoe@mail.com"
+        formControlName="email" />
+    </ion-item>
+    <ion-item>
+      <ion-input label="Contraseña" type="password" labelPlacement="stacked" placeholder="*****"
+        formControlName="password" />
+    </ion-item>
+    <ion-item>
+      <ion-select aria-label="roles" label="Rol" label-placement="stacked">
+        <ion-select-option value="1">rol1</ion-select-option>
+        <ion-select-option value="2">rol2</ion-select-option>
+        <ion-select-option value="3">rol3</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div>
+      <ion-button expand="full" type="submit">Crear usuario</ion-button>
+    </div>
+  </ion-list>
+</form>
