@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpOptions } from '@capacitor/core';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,23 @@ export class ProfileService {
 
   constructor() { }
 
-  listProfiles() {
+  async getToken() {
+    const token = await Preferences.get({ key: 'token' });
+
+    return token;
+  }
+
+  async listProfiles() {
+
+    let { value } = await this.getToken();
+
     const options: HttpOptions = {
       url: this.baseUrl,
       params: {},
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
     }
 
     return CapacitorHttp.get(options).then((response) => {
@@ -22,11 +35,16 @@ export class ProfileService {
     })
   }
 
-  saveProfile(data: any) {
+  async saveProfile(data: any) {
+    let { value } = await this.getToken();
+
     const options: HttpOptions = {
       url: this.baseUrl,
-      data: data,
-      headers: { 'Content-Type': 'application/json' }
+      params: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
     }
 
     return CapacitorHttp.post(options).then((response) => {
@@ -34,11 +52,16 @@ export class ProfileService {
     })
   }
 
-  getProfile(id: number) {
+  async getProfile(id: number) {
+    let { value } = await this.getToken();
+
     const options: HttpOptions = {
-      url: this.baseUrl + '/' + id,
+      url: this.baseUrl,
       params: {},
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
     }
 
     return CapacitorHttp.get(options).then((response) => {
@@ -46,11 +69,16 @@ export class ProfileService {
     })
   }
 
-  updateProfile(id: number, data: any) {
+  async updateProfile(id: number, data: any) {
+    let { value } = await this.getToken();
+
     const options: HttpOptions = {
-      url: this.baseUrl + '/' + id,
-      data: data,
-      headers: { 'Content-Type': 'application/json' }
+      url: this.baseUrl,
+      params: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
     }
 
     return CapacitorHttp.put(options).then((response) => {

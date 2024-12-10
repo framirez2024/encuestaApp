@@ -11,7 +11,7 @@ export class AuthService {
 
   public login(data: any) {
     const options: HttpOptions = {
-      url: this.baseUrl + '/suth',
+      url: this.baseUrl + '/auth',
       data: data,
       headers: { 'Content-Type': 'application/json' }
     }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'login-component',
@@ -11,13 +14,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   public formLogin: FormGroup;
+  public errors: string = '';
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastController: ToastController
   ) {
     this.formLogin = new FormGroup({
-      user: new FormControl('', [
+      email: new FormControl('', [
         Validators.required
       ]),
       password: new FormControl('', [
@@ -26,11 +31,44 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  async ngOnInit() {
+
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: "Ocurrio un error en la autenticación",
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
 
   handleLogin() {
 
-    this.authService.login(this.formLogin.value);
-    this.router.navigate(['/dashboard']);
+    this.authService.login(this.formLogin.value).then(res => {
+      if (res.token) {
+        this.setToken(res.token)
+        this.router.navigate(['/dashboard']);
+      }
+
+      if (res.status == 422) {
+        this.errors = res.errors.email[0];
+        this.presentToast("bottom");
+
+      }
+
+    })
+      .catch(err => {
+
+      });
+  }
+
+  async setToken(token: any) {
+    await Preferences.set({
+      key: 'token',
+      value: token
+    });
   }
 }
