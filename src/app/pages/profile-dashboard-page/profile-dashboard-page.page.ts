@@ -11,6 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileDashboardPagePage implements OnInit {
 
   public profiles: Profile[] = [];
+  private profileSelected: any;
 
   public alertButtons = [
     {
@@ -46,7 +47,16 @@ export class ProfileDashboardPagePage implements OnInit {
   }
 
   setResult(ev: any) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
+
+    if (ev.detail.role == 'confirm') {
+      this.profileService.deleteProfile(this.profileSelected).then(resp => {
+        window.location.reload()
+      })
+    }
+  }
+
+  setProfileToDelete(id: any) {
+    this.profileSelected = id;
   }
 
 }

@@ -1,7 +1,8 @@
 <form [formGroup]="formCreateUser" (submit)="handleSaveUser()">
   <ion-list>
     <ion-item>
-      <ion-input label="Nombre" labelPlacement="stacked" placeholder="Jhon" formControlName="name" />
+      <ion-input label="Nombre" labelPlacement="stacked" placeholder="Jhon" formControlName="name"
+        errorText="El nombre es requerido" />
     </ion-item>
     <ion-item>
       <ion-input label="Apellidos" labelPlacement="stacked" placeholder="Doe" formControlName="last_name" />

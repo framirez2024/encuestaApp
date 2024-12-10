@@ -18,7 +18,7 @@
                 <ion-item-option [routerLink]="['/dashboard/role-edit', role.id]">
                     <ion-icon class="option-btn" name="create-outline"></ion-icon>
                 </ion-item-option>
-                <ion-item-option color="white" id="deleteRoleBtn{{role.id}}">
+                <ion-item-option color="white" id="deleteRoleBtn{{role.id}}" (click)="setRoleToDelete(role.id)">
                     <ion-icon color="danger" class="option-btn" name="trash-outline"></ion-icon>
                 </ion-item-option>
             </ion-item-options>

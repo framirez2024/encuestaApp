@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Role } from 'src/app/models/Role';
 import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,7 +19,8 @@ export class UserCreateComponentComponent implements OnInit {
   constructor(
     private userService: UserService,
     private roleService: RoleService,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) {
     this.formCreateUser = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -36,8 +38,29 @@ export class UserCreateComponentComponent implements OnInit {
     })
   }
 
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: "Ocurrio un error al guardar los datos, verifica los datos",
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
+
   handleSaveUser() {
-    this.userService.saveUser(this.formCreateUser.value).then((resp) => {
+
+    if (!this.formCreateUser.valid) {
+      this.formCreateUser.markAllAsTouched();
+      return;
+    }
+    this.userService.saveUser(this.formCreateUser.value).then((res) => {
+
+      if (res.status == 422) {
+        this.presentToast("bottom");
+        return;
+      }
+
       this.router.navigate(["/dashboard/users"])
     })
     console.log(this.formCreateUser.value)

@@ -41,6 +41,7 @@ export class ProfileService {
     const options: HttpOptions = {
       url: this.baseUrl,
       params: {},
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + value
@@ -56,7 +57,7 @@ export class ProfileService {
     let { value } = await this.getToken();
 
     const options: HttpOptions = {
-      url: this.baseUrl,
+      url: this.baseUrl + '/' + id,
       params: {},
       headers: {
         'Content-Type': 'application/json',
@@ -73,8 +74,9 @@ export class ProfileService {
     let { value } = await this.getToken();
 
     const options: HttpOptions = {
-      url: this.baseUrl,
+      url: this.baseUrl + '/' + id,
       params: {},
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + value
@@ -82,6 +84,23 @@ export class ProfileService {
     }
 
     return CapacitorHttp.put(options).then((response) => {
+      return response.data
+    })
+  }
+
+  async deleteProfile(id: number) {
+    let { value } = await this.getToken();
+
+    const options: HttpOptions = {
+      url: this.baseUrl + '/' + id,
+      params: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
+    }
+
+    return CapacitorHttp.delete(options).then((response) => {
       return response.data
     })
   }

@@ -40,6 +40,7 @@ export class UserService {
     const options: HttpOptions = {
       url: this.baseUrl,
       params: {},
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + value
@@ -55,7 +56,7 @@ export class UserService {
     let { value } = await this.getToken();
 
     const options: HttpOptions = {
-      url: this.baseUrl,
+      url: this.baseUrl + '/' + id,
       params: {},
       headers: {
         'Content-Type': 'application/json',
@@ -72,8 +73,9 @@ export class UserService {
     let { value } = await this.getToken();
 
     const options: HttpOptions = {
-      url: this.baseUrl,
+      url: this.baseUrl + '/' + id,
       params: {},
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + value

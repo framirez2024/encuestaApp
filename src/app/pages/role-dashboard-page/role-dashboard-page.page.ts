@@ -13,6 +13,7 @@ import { Role } from '../../models/Role';
 export class RoleDashboardPagePage implements OnInit {
 
   public roles: Role[] = [];
+  public roleSelected: any = null;
 
   public alertButtons = [
     {
@@ -51,6 +52,16 @@ export class RoleDashboardPagePage implements OnInit {
   }
 
   setResult(ev: any) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
+    console.log(ev.detail.role);
+
+    if (ev.detail.role == 'confirm') {
+      this.roleService.deleteRole(this.roleSelected).then(resp => {
+        window.location.reload()
+      })
+    }
+  }
+
+  setRoleToDelete(id: any) {
+    this.roleSelected = id;
   }
 }

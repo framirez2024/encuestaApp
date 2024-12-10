@@ -47,6 +47,11 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
 
+    if (!this.formLogin.valid) {
+      this.formLogin.markAllAsTouched();
+      return;
+    }
+
     this.authService.login(this.formLogin.value).then(res => {
       if (res.token) {
         this.setToken(res.token)
@@ -61,7 +66,7 @@ export class LoginComponent implements OnInit {
 
     })
       .catch(err => {
-
+        console.log(err.error.message)
       });
   }
 

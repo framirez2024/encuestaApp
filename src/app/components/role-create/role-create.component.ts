@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { RoleService } from 'src/app/services/role.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class RoleCreateComponent implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private route: Router
+    private route: Router,
+    private toastController: ToastController
   ) {
     this.formCreateRole = new FormGroup({
       name: new FormControl('', Validators.required)
@@ -23,8 +25,28 @@ export class RoleCreateComponent implements OnInit {
 
   ngOnInit() { }
 
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: "Ocurrio un error al crear el rol",
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
+
   handleSaveRole() {
-    this.roleService.saveRole(this.formCreateRole.value).then((response) => {
+    if (!this.formCreateRole.valid) {
+      this.formCreateRole.markAllAsTouched();
+      return;
+    }
+
+    this.roleService.saveRole(this.formCreateRole.value).then((res) => {
+
+      if (res.status == 422) {
+        this.presentToast("bottom");
+        return;
+      }
       this.route.navigate(['/dashboard/roles'])
     })
   }
