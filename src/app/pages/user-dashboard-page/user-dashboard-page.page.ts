@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-dashboard-page',
@@ -9,24 +10,7 @@ import { User } from 'src/app/models/User';
 })
 export class UserDashboardPagePage implements OnInit {
 
-  public users: User[] = [
-    {
-      id: 1,
-      name: "jhon",
-      lastName: "doe",
-      email: "jhondoe@mail.com",
-      password: "12345",
-      roleId: 1
-    },
-    {
-      id: 2,
-      name: "jhon",
-      lastName: "smith",
-      email: "smithj@mail.com",
-      password: "12345",
-      roleId: 2
-    },
-  ];
+  public users: User[] = [];
 
   public alertButtons = [
     {
@@ -46,10 +30,15 @@ export class UserDashboardPagePage implements OnInit {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    const rolesResponse = this.userService.listUsers().then(r => {
+      this.users = r.data
+      console.log(r.data);
+    })
   }
 
   handleCreateUser() {

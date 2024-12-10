@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile-dashboard-page',
@@ -9,28 +10,7 @@ import { Profile } from 'src/app/models/Profile';
 })
 export class ProfileDashboardPagePage implements OnInit {
 
-  public profiles: Profile[] = [
-    {
-      id: 1,
-      name: 'perfil 1'
-    },
-    {
-      id: 2,
-      name: 'perfil 2'
-    },
-    {
-      id: 3,
-      name: 'perfil 3'
-    },
-    {
-      id: 4,
-      name: 'perfil 4'
-    },
-    {
-      id: 5,
-      name: 'perfil 5'
-    },
-  ];
+  public profiles: Profile[] = [];
 
   public alertButtons = [
     {
@@ -50,10 +30,15 @@ export class ProfileDashboardPagePage implements OnInit {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) { }
 
   ngOnInit() {
+    const rolesResponse = this.profileService.listProfiles().then(r => {
+      this.profiles = r.data
+      console.log(r.data);
+    })
   }
 
   handleCreateRole() {

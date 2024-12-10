@@ -1,3 +1,4 @@
+import { RoleService } from './../../services/role.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
@@ -11,24 +12,7 @@ import { Role } from '../../models/Role';
 })
 export class RoleDashboardPagePage implements OnInit {
 
-  public roles: Role[] = [
-    {
-      id: 1,
-      name: "Administrador"
-    },
-    {
-      id: 2,
-      name: "rol 1"
-    },
-    {
-      id: 3,
-      name: "rol 2"
-    },
-    {
-      id: 4,
-      name: "rol 3"
-    },
-  ];
+  public roles: Role[] = [];
 
   public alertButtons = [
     {
@@ -47,10 +31,20 @@ export class RoleDashboardPagePage implements OnInit {
     },
   ];
 
-  constructor(private router: Router) { }
+  constructor(
+    private roleService: RoleService,
+    private router: Router) {
+
+  }
 
   ngOnInit() {
+    const rolesResponse = this.roleService.listRoles().then(r => {
+      this.roles = r.data
+      console.log(r.data);
+    })
+
   }
+
 
   handleCreateRole() {
     this.router.navigate(["/dashboard/role-create"])

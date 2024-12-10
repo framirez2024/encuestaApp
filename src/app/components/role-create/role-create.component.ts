@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RoleService } from 'src/app/services/role.service';
 
 @Component({
   selector: 'app-role-create-component',
@@ -11,7 +13,8 @@ export class RoleCreateComponent implements OnInit {
   public formCreateRole: FormGroup
 
   constructor(
-
+    private roleService: RoleService,
+    private route: Router
   ) {
     this.formCreateRole = new FormGroup({
       name: new FormControl('', Validators.required)
@@ -21,6 +24,8 @@ export class RoleCreateComponent implements OnInit {
   ngOnInit() { }
 
   handleSaveRole() {
-    console.log(this.formCreateRole.value)
+    this.roleService.saveRole(this.formCreateRole.value).then((response) => {
+      this.route.navigate(['/dashboard/roles'])
+    })
   }
 }

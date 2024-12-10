@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile-create-component',
@@ -11,7 +13,8 @@ export class ProfileCreateComponentComponent implements OnInit {
   public formCreateProfile: FormGroup
 
   constructor(
-
+    private profileService: ProfileService,
+    private route: Router
   ) {
     this.formCreateProfile = new FormGroup({
       name: new FormControl('', Validators.required)
@@ -21,6 +24,8 @@ export class ProfileCreateComponentComponent implements OnInit {
   ngOnInit() { }
 
   handleSaveProfile() {
-    console.log(this.formCreateProfile.value)
+    this.profileService.saveProfile(this.formCreateProfile.value).then((res) => {
+      this.route.navigate(['/dashboard/profiles'])
+    });
   }
 }
