@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nueva aplicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <!-- <ion-card-header>
+      <ion-card-title>Nueva aplicación</ion-card-title>
+    </ion-card-header> -->
+    <ion-card-content>
+      <form [formGroup]="formCreate" (submit)="handleSaveForm()">
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="Selecciona la institución" formControlName="school_id"
+              errorText="La institución es requerida">
+              <ion-select-option *ngFor="let school of schools" [value]="school.id">{{school.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-select placeholder="Selecciona la encuesta" formControlName="survey_id"
+              errorText="La institución es requerida">
+              <ion-select-option *ngFor="let survey of surveys" [value]="survey.id">{{survey.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Feha" type="date" labelPlacement="floating" placeholder="01/01/2001"
+              formControlName="date" errorText="La fecha es requerida" />
+          </ion-item>
+        </ion-list>
+        <div>
+          <ion-button expand="full" type="submit">Crear aplicaión encuesta</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

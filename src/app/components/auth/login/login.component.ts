@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
 
+    // Se pregunta si el formulario no es valido
     if (!this.formLogin.valid) {
       this.formLogin.markAllAsTouched();
       return;

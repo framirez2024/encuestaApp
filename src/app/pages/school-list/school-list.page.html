@@ -1,0 +1,30 @@
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Instituciones</h1>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button [routerLink]="['/dashboard/school-create']">Nueva Institución</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item-sliding *ngFor="let school of schools">
+      <ion-item>
+        <ion-label>{{school.name}}</ion-label>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option [routerLink]="['/dashboard/school-edit', school.id]">
+          <ion-icon class="option-btn" name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="white" id="deleteSchoolBtn{{school.id}}" (click)="setSchoolToDelete(school.id)">
+          <ion-icon color="danger" class="option-btn" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-alert trigger="deleteSchoolBtn{{school.id}}" header="Eliminar role"
+        message="¿Esta seguro de eliminar el rol?, no se pueden deshacer los cambios" [buttons]="alertButtons"
+        (didDismiss)="setResult($event)"></ion-alert>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

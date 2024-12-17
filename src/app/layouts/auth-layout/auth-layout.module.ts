@@ -8,7 +8,6 @@ import { AuthLayoutPageRoutingModule } from './auth-layout-routing.module';
 
 import { AuthLayoutPage } from './auth-layout.page';
 import { LoginPageComponent } from 'src/app/pages/auth/login-page/login-page.component';
-import { LoginComponent } from 'src/app/components/auth/login/login.component';
 
 @NgModule({
   imports: [
@@ -18,6 +17,6 @@ import { LoginComponent } from 'src/app/components/auth/login/login.component';
     IonicModule,
     AuthLayoutPageRoutingModule
   ],
-  declarations: [AuthLayoutPage, LoginPageComponent, LoginComponent]
+  declarations: [AuthLayoutPage, LoginPageComponent]
 })
 export class AuthLayoutPageModule { } 

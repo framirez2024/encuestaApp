@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nueva encuesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <!-- <ion-card-header>
+      <ion-card-title>Nueva encuesta</ion-card-title>
+    </ion-card-header> -->
+    <ion-card-content>
+      <form [formGroup]="formCreate" (submit)="handleSaveForm()">
+        <div>
+          <ion-input label="Nombre de la encuesta" labelPlacement="floating" placeholder="Encuesta 1"
+            formControlName="name" errorText="El nombnre es requerido" />
+        </div>
+        <div>
+          <ion-textarea label="Descripción" labelPlacement="floating" placeholder="Encuesta 1"
+            formControlName="description"></ion-textarea>
+        </div>
+        <div>
+          <ion-button expand="full" type="submit">Crear encuesta</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

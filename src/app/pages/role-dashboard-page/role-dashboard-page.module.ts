@@ -17,4 +17,4 @@ import { RoleDashboardPagePage } from './role-dashboard-page.page';
   ],
   declarations: [RoleDashboardPagePage]
 })
-export class RoleDashboardPagePageModule {}
+export class RoleDashboardPagePageModule { }

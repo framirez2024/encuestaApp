@@ -34,30 +34,42 @@ export class RoleDashboardPagePage implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private router: Router) {
+    private router: Router
+  ) {
 
   }
 
   ngOnInit() {
-    const rolesResponse = this.roleService.listRoles().then(r => {
-      this.roles = r.data
-      console.log(r.data);
-    })
-
+    this.fetchRoles()
   }
 
+  async fetchRoles() {
+    try {
+      const rolesResponse = await this.roleService.listRoles();
+      this.roles = rolesResponse.data;
+    } catch (err) {
+
+    }
+  }
 
   handleCreateRole() {
     this.router.navigate(["/dashboard/role-create"])
+  }
+
+  async deleteRole() {
+    try {
+      await this.roleService.deleteRole(this.roleSelected);
+      this.fetchRoles();
+    } catch (err) {
+
+    }
   }
 
   setResult(ev: any) {
     console.log(ev.detail.role);
 
     if (ev.detail.role == 'confirm') {
-      this.roleService.deleteRole(this.roleSelected).then(resp => {
-        window.location.reload()
-      })
+      this.deleteRole()
     }
   }
 

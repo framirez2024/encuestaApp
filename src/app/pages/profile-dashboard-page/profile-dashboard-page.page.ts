@@ -36,22 +36,37 @@ export class ProfileDashboardPagePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const rolesResponse = this.profileService.listProfiles().then(r => {
-      this.profiles = r.data
-      console.log(r.data);
-    })
+    this.fetchProfile()
+  }
+
+  async fetchProfile() {
+
+    try {
+      const rolesResponse = await this.profileService.listProfiles();
+      this.profiles = rolesResponse.data;
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   handleCreateRole() {
     this.router.navigate(["/dashboard/profile-create"])
   }
 
+  async deleteProfile() {
+    try {
+      this.profileService.deleteProfile(this.profileSelected);
+      this.fetchProfile();
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   setResult(ev: any) {
 
     if (ev.detail.role == 'confirm') {
-      this.profileService.deleteProfile(this.profileSelected).then(resp => {
-        window.location.reload()
-      })
+      this.deleteProfile();
     }
   }
 

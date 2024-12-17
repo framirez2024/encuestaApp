@@ -9,7 +9,6 @@ import { DashboardLayoutPageRoutingModule } from './dashboard-layout-routing.mod
 import { DashboardLayoutPage } from './dashboard-layout.page';
 import { DashboardSidebarComponent } from 'src/app/components/dashboar-sidebar/dashboard-sidebar.component';
 import { DashboardAvatarComponent } from 'src/app/components/dashboard-avatar/dashboard-avatar.component';
-import { RoleCreateComponent } from 'src/app/components/role-create/role-create.component';
 
 @NgModule({
   imports: [
