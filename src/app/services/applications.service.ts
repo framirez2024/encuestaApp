@@ -8,6 +8,8 @@ import { Preferences } from '@capacitor/preferences';
 export class ApplicationsService {
 
   public baseUrl: string = 'http://localhost:8000/api/applicationSurveys';
+  public baseUrlApplySurvey: string = 'http://localhost:8000/api/applaySurvey';
+
 
   constructor() { }
 
@@ -109,6 +111,40 @@ export class ApplicationsService {
 
     const options: HttpOptions = {
       url: `${this.baseUrl}/${ApplicationId}/addQuestion`,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + value
+      }
+    }
+
+    return CapacitorHttp.post(options).then((response) => {
+      return response.data
+    })
+  }
+
+  async getSurveyToApplay(id: number) {
+    // let { value } = await this.getToken();
+
+    const options: HttpOptions = {
+      url: this.baseUrlApplySurvey + '/' + id,
+      params: {},
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': 'Bearer ' + value
+      }
+    }
+
+    return CapacitorHttp.get(options).then((response) => {
+      return response.data
+    })
+  }
+
+  async saveSurveyApplication(applicationId: number, data: any) {
+    let { value } = await this.getToken();
+
+    const options: HttpOptions = {
+      url: this.baseUrlApplySurvey + '/' + applicationId,
       data: data,
       headers: {
         'Content-Type': 'application/json',

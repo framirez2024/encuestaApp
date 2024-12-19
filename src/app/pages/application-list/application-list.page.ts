@@ -68,4 +68,10 @@ export class ApplicationListPage implements OnInit {
     this.applicationSelected = id;
   }
 
+  openInNewTab(url: string, id: number) {
+    const baseUrl = window.location.origin + '/';
+    console.log(baseUrl + url + id);
+    window.open(baseUrl, '_blank');
+  }
+
 }

@@ -1,0 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Encuesta - {{application?.survey?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if(application?.survey?.questions){
+  <app-form-apply-survey [applicationId]="application.id"
+    [questions]="application?.survey?.questions"></app-form-apply-survey>
+  }
+</ion-content>

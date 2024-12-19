@@ -1,0 +1,28 @@
+<form *ngIf="questions" (submit)="handleSubmitSuveyApply()" [formGroup]="formApplySurvey">
+  <ion-card *ngFor="let question of questions">
+    <ion-card-header>
+      <ion-card-title>{{question.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      @if(question.type == 'text'){
+      <ion-input label="Pregunta" labelPlacement="floating" placeholder=""
+        formControlName="{{question.id}}"></ion-input>
+      }
+      @if(question.type == 'options'){
+      <ion-list>
+        <ion-radio-group formArrayName="{{question.id}}" (ionChange)="handleSetValueOption(question.id, $event)">
+          <ion-item *ngFor="let option of question?.options">
+            <ion-radio [value]="option">{{option}}</ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      }
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-button type="submit">Enviar respuestas</ion-button>
+    </ion-card-content>
+  </ion-card>
+</form>

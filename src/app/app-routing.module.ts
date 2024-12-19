@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./layouts/dashboard-layout/dashboard-layout.module').then(m => m.DashboardLayoutPageModule)
   },
+  {
+    path: 'application-survey/:id',
+    loadChildren: () => import('./pages/application-survey/application-survey.module').then(m => m.ApplicationSurveyPageModule)
+  },
+
 ];
 
 @NgModule({

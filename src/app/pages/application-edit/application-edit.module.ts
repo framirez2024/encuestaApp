@@ -17,4 +17,4 @@ import { ApplicationEditPage } from './application-edit.page';
   ],
   declarations: [ApplicationEditPage]
 })
-export class ApplicationEditPageModule {}
+export class ApplicationEditPageModule { }
